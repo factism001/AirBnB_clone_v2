@@ -15,22 +15,23 @@ classes = {
         'State': State, 'City': City, 'Amenity': Amenity,
         'Review': Review
         }
-        
+
+
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
     __file_path = 'file.json'
     __objects = {}
 
-        """
-        returns a dictionary containing every object
-        """
-        if (not cls):
-            return self.__objects
-        result = {}
-        for key in self.__objects.keys():
-            if (key.split(".")[0] == cls.__name__):
-                result.update({key: self.__objects[key]})
-        return result
+    """
+    returns a dictionary containing every object
+    """
+    if (not cls):
+        return self.__objects
+    result = {}
+    for key in self.__objects.keys():
+        if (key.split(".")[0] == cls.__name__):
+            result.update({key: self.__objects[key]})
+            return result
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
