@@ -5,6 +5,9 @@ from sqlalchemy.orm import relationship
 import models
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from os import environ
+from models.amenity import Amenity
+from models.review import Review
+from models.user import User
 
 classes = {
                'BaseModel': BaseModel, 'User': User, 'Place': Place,
