@@ -10,6 +10,7 @@ class FileStorage:
     """
     serializes and deserializes instances to and from JSON file
     saved into file_path
+
     """
 
     __file_path = "file.json"
@@ -54,6 +55,8 @@ class FileStorage:
             for id, dict in temp.items():
                 temp_instance = models.dummy_classes[dict["__class__"]](**dict)
                 self.__objects[id] = temp_instance
+        except:
+            pass
 
     def close(self):
         """display our HBNB data

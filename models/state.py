@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-""" State Module for HBNB project """
+"""
+    contains state class to represent a state
+"""
+
 from models.base_model import BaseModel, Base
 import models
 from sqlalchemy import Column, String
@@ -14,7 +17,7 @@ class State(BaseModel, Base):
     if (storage_engine == 'db'):
         __tablename__ = "states"
         name = Column(String(128), nullable=False)
-        cities = relationship('City', backref='state', cascade='delete')
+        cities = relationship("City", backref="state")
     else:
         name = ""
 

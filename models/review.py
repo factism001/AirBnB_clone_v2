@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" Review module for the HBNB project """
+"""
+    contains review class to represent reviews
+"""
 from models.base_model import BaseModel, Base
 from models.place import Place
 from models.user import User
@@ -12,7 +14,9 @@ storage_engine = environ.get("HBNB_TYPE_STORAGE")
 
 
 class Review(BaseModel, Base):
-    """ Review classto store review information """
+    """
+        Review class
+    """
     if (storage_engine == 'db'):
         __tablename__ = "reviews"
         place_id = Column(String(60), ForeignKey("places.id"))

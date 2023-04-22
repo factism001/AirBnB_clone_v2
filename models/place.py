@@ -1,22 +1,15 @@
 #!/usr/bin/python3
-""" Place Module for HBNB project """
+"""
+    module containing places to represent the place
+    module containing places to represent the place
+"""
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
 import models
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from os import environ
-from models.amenity import Amenity
-from models.review import Review
-from models.user import User
-
-classes = {
-               'BaseModel': BaseModel, 'User': User, 'Place': Place,
-               'State': State, 'City': City, 'Amenity': Amenity,
-               'Review': Review
-              }
 
 storage_engine = environ.get("HBNB_TYPE_STORAGE")
-
 
 if storage_engine == "db":
     place_amenity = Table('place_amenity', Base.metadata,
@@ -29,7 +22,10 @@ if storage_engine == "db":
 
 
 class Place(BaseModel, Base):
-    """ A place to stay """
+    """
+        Place class to represent places
+        Place class to represent places
+    """
     __tablename__ = "places"
     if (storage_engine == "db"):
         city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
@@ -65,7 +61,7 @@ class Place(BaseModel, Base):
         def reviews(self):
             """getter function for reviews attribute"""
             result = []
-            temp = classes['Review']
+            temp = models.dummy_classes['Review']
             for r in models.storage.all(temp).values():
                 if r.place_id == self.id:
                     result.append(r)
@@ -75,7 +71,7 @@ class Place(BaseModel, Base):
         def amenities(self):
             """getter function for amenity attribute"""
             result = []
-            temp = classes['Amenity']
+            temp = models.dummy_classes['Amenity']
             for a in models.storage.all(temp).values():
                 if a in self.amenity_ids:
                     result.append(a)
@@ -84,6 +80,6 @@ class Place(BaseModel, Base):
         @amenities.setter
         def amenities(self, obj):
             """ setter for amenities class """
-            temp = classes['Amenity']
+            temp = models.dummy_classes['Amenity']
             if (isinstance(obj, models.storage.all(temp))):
                 self.amenity_ids.append(obj.id)

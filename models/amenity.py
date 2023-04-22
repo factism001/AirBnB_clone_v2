@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" State Module for HBNB project """
+"""
+    module containing Amenity class
+"""
 from models.base_model import BaseModel, Base
 from models.city import City
 from models.user import User
@@ -11,7 +13,7 @@ from os import environ
 storage_engine = environ.get("HBNB_TYPE_STORAGE")
 
 
-class Amenity(BaseModel):
+class Amenity(BaseModel, Base):
     """
         Amenity class
     """
