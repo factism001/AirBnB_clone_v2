@@ -12,5 +12,5 @@ def do_pack():
         local("tar -cvzf versions/web_static_{}.tgz web_static/".
               format(time_display))
         return ("versions/web_static_{}.tgz".format(time_display))
-    except:
+    except Exception:
         return None
