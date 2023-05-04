@@ -1,29 +1,28 @@
 #!/usr/bin/python3
-"""web server distribution"""
-from fabric.api import *
-import os.path
+""" Script that distributes an archive to your web servers using do_deploy"""
 
-env.user = 'ubuntu'
-env.hosts = ["35.174.209.230", "54.157.184.171"]
-env.key_filename = "~/id_rsa"
+from fabric.api import local
+from fabric.operations import run, put, sudo
+import os.path
+from fabric.api import env
+env.hosts = ['35.174.209.230', '54.157.184.171']
 
 
 def do_deploy(archive_path):
-    """distributes an archive to your web servers
-    """
-    if os.path.exists(archive_path) is False:
+    if (os.path.isfile(archive_path) is False):
         return False
+
     try:
-        arc = archive_path.split("/")
-        base = arc[1].strip('.tgz')
-        put(archive_path, '/tmp/')
-        sudo('mkdir -p /data/web_static/releases/{}'.format(base))
-        main = "/data/web_static/releases/{}".format(base)
-        sudo('tar -xzf /tmp/{} -C {}/'.format(arc[1], main))
-        sudo('rm /tmp/{}'.format(arc[1]))
-        sudo('mv {}/web_static/* {}/'.format(main, main))
-        sudo('rm -rf /data/web_static/current')
-        sudo('ln -s {}/ "/data/web_static/current"'.format(main))
+        nconfig = archive_path.split("/")[-1]
+        ndir = ("/data/web_static/releases/" + nconfig.split(".")[0])
+        put(archive_path, "/tmp/")
+        run("sudo mkdir -p {}".format(ndir))
+        run("sudo tar -xzf /tmp/{} -C {}".format(nconfig, ndir))
+        run("sudo rm /tmp/{}".format(nconfig))
+        run("sudo mv {}/web_static/* {}/".format(ndir, ndir))
+        run("sudo rm -rf {}/web_static".format(ndir))
+        run("sudo rm -rf /data/web_static/current")
+        run("sudo ln -s {} /data/web_static/current".format(ndir))
         return True
     except:
         return False
