@@ -4,7 +4,8 @@
 from fabric.api import local
 from fabric.operations import run, put, sudo
 import os.path
-from fabric.api import env
+from fabric.api import env, local
+
 env.hosts = ['35.174.209.230', '54.157.184.171']
 
 
