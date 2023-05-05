@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" test file """
+"""creates and distributes an archive to web servers"""
 import os.path
 import time
 from fabric.operations import run, put, sudo
@@ -8,6 +8,7 @@ env.hosts = ['35.174.209.230', '54.157.184.171']
 
 
 def do_pack():
+    """creates archive to web servers"""
     timestr = time.strftime("%Y%m%d%H%M%S")
     try:
         local("mkdir -p versions")
@@ -19,6 +20,7 @@ def do_pack():
 
 
 def do_deploy(archive_path):
+    """distributes an archive to web servers"""
     if (os.path.isfile(archive_path) is False):
         return False
 
@@ -39,6 +41,7 @@ def do_deploy(archive_path):
 
 
 def deploy():
+    """creates and distributes an archive to web servers"""
     try:
         archive_address = do_pack()
         val = do_deploy(archive_address)

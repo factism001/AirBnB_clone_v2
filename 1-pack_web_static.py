@@ -6,6 +6,8 @@ import time
 
 
 def do_pack():
+    """distributes an archive to your web servers
+    """
     time_string = time.strftime("%Y%m%d%H%M%S")
     try:
         local("mkdir -p versions")

@@ -10,6 +10,10 @@ env.hosts = ['35.174.209.230', '54.157.184.171']
 
 
 def do_deploy(archive_path):
+    """ Script that distributes an archive
+        to your web servers using do_deploy
+    """
+
     if (os.path.isfile(archive_path) is False):
         return False
 
