@@ -4,8 +4,12 @@ import os.path
 import os
 from fabric.api import *
 from fabric.operations import run, put, sudo
+from fabric.state import commands, connections
 import time
+
+env.user = 'ubuntu'
 env.hosts = ['35.174.209.230', '54.157.184.171']
+env.key_filename = "~/id_rsa"
 
 
 def do_clean(number=0):
